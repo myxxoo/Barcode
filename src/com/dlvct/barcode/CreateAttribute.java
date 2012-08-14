@@ -110,6 +110,7 @@ public class CreateAttribute extends Activity {
 					return;
 				}
 				dataHelper.saveAttribute(typeId, data);
+				dataHelper.Close();
 				Toast.makeText(CreateAttribute.this, "保存成功", Toast.LENGTH_SHORT).show();
 				finish();
 				break;
@@ -150,6 +151,13 @@ public class CreateAttribute extends Activity {
 		// TODO Auto-generated method stub
 		listView.addView(inflater.inflate(R.layout.create_new_attribute_item, null), listView.getChildCount());
 		return super.onMenuItemSelected(featureId, item);
+	}
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		dataHelper.Close();
 	}
 
 }
