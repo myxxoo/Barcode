@@ -14,7 +14,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" >
         <activity
-            android:name=".Barcode"
+            android:name=".Login"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,6 +29,8 @@
         <activity android:name=".CollectTime"/>
         <activity android:name=".CollectTmp"/>
         <activity android:name=".SystemInfo"/>
+        <activity android:name=".Barcode"/>
+        <activity android:name=".CreateAttribute"/>
     </application>
 
 </manifest>

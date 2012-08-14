@@ -17,7 +17,7 @@ public class Barcode extends Activity implements SurfaceHolder.Callback{
     private Camera camera; 
 	
     private Button selectPic,inputCode;
-    private ImageButton mycard;
+    private ImageButton mycard,more;
     
     /** Called when the activity is first created. */
     @Override
@@ -35,10 +35,12 @@ public class Barcode extends Activity implements SurfaceHolder.Callback{
     	selectPic = (Button)findViewById(R.id.select_pic);
     	inputCode = (Button)findViewById(R.id.input_code);
     	mycard = (ImageButton)findViewById(R.id.mycard);
+    	more = (ImageButton)findViewById(R.id.more);
     	
     	selectPic.setOnClickListener(click);
     	inputCode.setOnClickListener(click);
     	mycard.setOnClickListener(click);
+    	more.setOnClickListener(click);
     }
 
 	@Override
@@ -76,6 +78,10 @@ public class Barcode extends Activity implements SurfaceHolder.Callback{
 			case R.id.mycard:
 				Intent mycard = new Intent(Barcode.this,Mycard.class);
 				startActivity(mycard);
+				break;
+			case R.id.more:
+				Intent more = new Intent(Barcode.this,CreateAttribute.class);
+				startActivity(more);
 				break;
 			default:
 				break;
