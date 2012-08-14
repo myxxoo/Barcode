@@ -10,7 +10,10 @@ public class SqliteHelper extends SQLiteOpenHelper{
 
     //用来保存UserID、Access Token、Access Secret的表名
 
-    public static final String TB_USER="user";
+	public static final String TB_USER="user";
+	public static final String TB_TYPE="type";
+	public static final String TB_ATTRIBUTE="attribute";
+	public static final String TB_COLLECT="collect";
     public static final String TB_PREFERENCES="preferences";
     public SqliteHelper(Context context, String name, CursorFactory factory, int version) {
 
@@ -26,16 +29,38 @@ public class SqliteHelper extends SQLiteOpenHelper{
 
         db.execSQL("CREATE TABLE IF NOT EXISTS "+
 				TB_USER+"("+
-                "ID"+" integer AUTO_INCREMENT primary key,"+
+                "ID"+" integer  primary key,"+
                 "USERNAME"+" varchar,"+
                 "PASSWORD"+" varchar"+
                 ")"
                 );
         db.execSQL("CREATE TABLE IF NOT EXISTS "+
 				TB_PREFERENCES+"("+
-                "ID"+" integer AUTO_INCREMENT primary key,"+
+                "ID"+" integer  primary key,"+
                 "USERID"+" varchar,"+
                 "AUTO_LOGIN"+" varchar"+ 		//0:正常  1:自动登陆
+                ")"
+                );
+        db.execSQL("CREATE TABLE IF NOT EXISTS "+
+				TB_TYPE+"("+
+                "ID"+" integer  primary key,"+
+                "TYPE"+" varchar"+
+                ")"
+                );
+        db.execSQL("CREATE TABLE IF NOT EXISTS "+
+				TB_ATTRIBUTE+"("+
+                "ID"+" integer  primary key,"+
+                "TYPEID"+" varchar,"+
+                "NAME"+" varchar"+
+                ")"
+                );
+        db.execSQL("CREATE TABLE IF NOT EXISTS "+
+				TB_COLLECT+"("+
+                "ID"+" integer  primary key,"+
+                "TYPEID"+" varchar,"+
+                "ATTRIBUTE_ID"+" varchar,"+
+                "VALUE"+" varchar,"+
+                "TIME"+" varchar"+
                 ")"
                 );
         Log.i("Database","onCreate");

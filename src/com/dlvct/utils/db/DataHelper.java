@@ -103,6 +103,47 @@ public class DataHelper {
     	}
     	return r;
     }
+    
+    public ArrayList<Map<String,String>> getType(){
+    	ArrayList<Map<String,String>> list = new ArrayList<Map<String,String>>();
+    	Cursor cursor = db.query(SqliteHelper.TB_TYPE, null, null, null, null, null, null,null);
+    	while(cursor.moveToNext()){
+    		HashMap<String,String> map = new HashMap<String, String>();
+    		map.put("ID", cursor.getString(0));
+        	map.put("TYPE", cursor.getString(1));
+        	list.add(map);
+    	}
+    	cursor.close();
+    	return list;
+    }
+    public long saveType(String[] data){
+    	long r = -1;
+    	ContentValues values = new ContentValues();
+    	for(int i=0;i<data.length;i++){
+    		values.put("ID", String.valueOf(i));
+        	values.put("TYPE", data[i]);
+    	}
+		db.delete(SqliteHelper.TB_TYPE, null, null);
+		r = db.insert(SqliteHelper.TB_TYPE, null, values);
+    	return r;
+    }
+    public long saveAttribute(String typeId,ArrayList<String> data){
+    	long r = -1;
+    	ContentValues values = new ContentValues();
+    	int size = data.size();
+    	db.beginTransaction();	
+    	for(int i=0;i<size;i++){
+//    		values.put("ID", String.valueOf(i));
+        	values.put("TYPEID", typeId);
+        	values.put("NAME", data.get(i));
+        	db.insert(SqliteHelper.TB_ATTRIBUTE, null, values);
+    	}
+    	db.setTransactionSuccessful();
+    	db.endTransaction();
+//		r = db.insert(SqliteHelper.TB_ATTRIBUTE, null, values);
+    	return r;
+    }
+    
 //    
 //    public int deleteSetting(String id){
 //    	if(id!=null){

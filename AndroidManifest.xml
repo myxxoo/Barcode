@@ -30,7 +30,7 @@
         <activity android:name=".CollectTmp"/>
         <activity android:name=".SystemInfo"/>
         <activity android:name=".Barcode"/>
-        <activity android:name=".CreateAttribute"/>
+        <activity android:name=".CreateAttribute" android:windowSoftInputMode="adjustResize"/>
     </application>
 
 </manifest>
