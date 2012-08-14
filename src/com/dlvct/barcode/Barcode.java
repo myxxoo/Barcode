@@ -80,7 +80,7 @@ public class Barcode extends Activity implements SurfaceHolder.Callback{
 				startActivity(mycard);
 				break;
 			case R.id.more:
-				Intent more = new Intent(Barcode.this,CreateAttribute.class);
+				Intent more = new Intent(Barcode.this,MoreList.class);
 				startActivity(more);
 				break;
 			default:
