@@ -1,5 +1,7 @@
 package com.dlvct.utils.db;
 
+import com.dlvct.barcode.R;
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
@@ -15,10 +17,14 @@ public class SqliteHelper extends SQLiteOpenHelper{
 	public static final String TB_ATTRIBUTE="attribute";
 	public static final String TB_COLLECT="collect";
     public static final String TB_PREFERENCES="preferences";
+    public static final String VIEW = "collect_view";
+    
+    private String[] types ;
+    
     public SqliteHelper(Context context, String name, CursorFactory factory, int version) {
 
         super(context, name, factory, version);
-
+        types = context.getResources().getStringArray(R.array.type);
     }
 
     //创建表
@@ -63,6 +69,15 @@ public class SqliteHelper extends SQLiteOpenHelper{
                 "TIME"+" varchar"+
                 ")"
                 );
+        db.execSQL("CREATE VIEW IF NOT EXISTS "+
+				VIEW+" AS SELECT C.TYPEID,C.ATTRIBUTE_ID,A.TYPE,B.NAME AS ATTRIBUTE,C.VALUE,C.TIME FROM "+
+        		TB_TYPE+" A,"+TB_ATTRIBUTE+" B,"+TB_COLLECT+" C WHERE A.ID=B.TYPEID AND C.TYPEID=A.ID AND C.ATTRIBUTE_ID=B.ID ORDER BY C.TIME"
+                );
+        for(int i=0;i<types.length;i++){
+        	db.execSQL("INSERT INTO "+TB_TYPE+" (TYPE) VALUES ('"+types[i]+"')");
+        }
+//        CREATE VIEW tt as select a.type,b.name as attribute,c.value,
+//        c.time from type a,attribute b,collect c where a.id=b.typeid and c.typeid=a.id and c.attribute_id=b.id order by c.time;
         Log.i("Database","onCreate");
 
     }

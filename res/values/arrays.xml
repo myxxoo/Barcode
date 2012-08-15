@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="more_list">
+        <item >新建属性</item>
+        <item >新建收藏</item>
+    </string-array>
+    <string-array name="type">
+        <item >名片</item>
+        <item >网站</item>
+        <item >商品</item>
+    </string-array>
+</resources>

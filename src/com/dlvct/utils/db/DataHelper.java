@@ -120,7 +120,6 @@ public class DataHelper {
     	long r = -1;
     	ContentValues values = new ContentValues();
     	for(int i=0;i<data.length;i++){
-    		values.put("ID", String.valueOf(i));
         	values.put("TYPE", data[i]);
     	}
 		db.delete(SqliteHelper.TB_TYPE, null, null);
@@ -133,14 +132,43 @@ public class DataHelper {
     	int size = data.size();
     	db.beginTransaction();	
     	for(int i=0;i<size;i++){
-//    		values.put("ID", String.valueOf(i));
         	values.put("TYPEID", typeId);
         	values.put("NAME", data.get(i));
         	db.insert(SqliteHelper.TB_ATTRIBUTE, null, values);
     	}
     	db.setTransactionSuccessful();
     	db.endTransaction();
-//		r = db.insert(SqliteHelper.TB_ATTRIBUTE, null, values);
+    	return r;
+    }
+    
+    public ArrayList<Map<String,String>> getAttribute(String typeId){
+    	ArrayList<Map<String,String>> list = new ArrayList<Map<String,String>>();
+    	Cursor cursor = db.query(SqliteHelper.TB_ATTRIBUTE, null, "TYPEID=?", new String[]{typeId}, null, null, null) ;
+    	while(cursor.moveToNext()){
+    		HashMap<String,String> map = new HashMap<String, String>();
+    		map.put("ID", cursor.getString(0));
+    		map.put("TYPEID", cursor.getString(1));
+    		map.put("NAME", cursor.getString(2));
+    		list.add(map);
+    	}
+    	return list;
+    }
+    
+    public long saveCollect(List<Map<String,String>> data){
+    	long r = -1;
+    	ContentValues values = new ContentValues();
+    	db.beginTransaction();
+    	int size = data.size();
+    	long time = new Date().getTime();
+    	for(int i=0;i<size;i++){
+    		values.put("TYPEID", data.get(i).get("TYPEID"));
+        	values.put("ATTRIBUTE_ID", data.get(i).get("ID"));
+        	values.put("VALUE", data.get(i).get("VALUE"));
+        	values.put("TIME", time);
+        	db.insert(SqliteHelper.TB_COLLECT, null, values);
+    	}
+    	db.setTransactionSuccessful();
+    	db.endTransaction();
     	return r;
     }
     

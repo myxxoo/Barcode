@@ -31,6 +31,8 @@
         <activity android:name=".SystemInfo"/>
         <activity android:name=".Barcode"/>
         <activity android:name=".CreateAttribute" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".CreateCollect"/>
+        <activity android:name=".MoreList"/>
     </application>
 
 </manifest>

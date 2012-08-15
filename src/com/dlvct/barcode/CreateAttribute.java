@@ -68,7 +68,7 @@ public class CreateAttribute extends Activity {
 		spinnerAdapter = new ArrayAdapter<String>(CreateAttribute.this,R.layout.spinner_item,typeList);
 		
 		listView = (LinearLayout) findViewById(R.id.create_new_attribute_list);
-		listView.addView(inflater.inflate(R.layout.create_new_attribute_item, null), 0);
+		listView.addView(inflater.inflate(R.layout.create_new_item, null), 0);
 		saveBtn = (Button)findViewById(R.id.create_new_attribute_save);
 		spinner = (Spinner)findViewById(R.id.create_new_attribute_spinner);
 		
@@ -100,7 +100,7 @@ public class CreateAttribute extends Activity {
 			case R.id.create_new_attribute_save:
 				int count = listView.getChildCount();
 				for(int i=0;i<count;i++){
-					String s = ((EditText)listView.getChildAt(i).findViewById(R.id.create_new_attribute_item_text)).getText().toString();
+					String s = ((EditText)listView.getChildAt(i).findViewById(R.id.create_new_item_text)).getText().toString();
 					if(!s.isEmpty()){
 						data.add(s);
 					}
@@ -149,7 +149,7 @@ public class CreateAttribute extends Activity {
 	@Override
 	public boolean onMenuItemSelected(int featureId, MenuItem item) {
 		// TODO Auto-generated method stub
-		listView.addView(inflater.inflate(R.layout.create_new_attribute_item, null), listView.getChildCount());
+		listView.addView(inflater.inflate(R.layout.create_new_item, null), listView.getChildCount());
 		return super.onMenuItemSelected(featureId, item);
 	}
 	
