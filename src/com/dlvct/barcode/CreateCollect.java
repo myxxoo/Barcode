@@ -141,6 +141,11 @@ public class CreateCollect extends Activity {
 		}
 	};
 	
+	protected void onDestroy() {
+		super.onDestroy();
+		dataHelper.Close();
+	};
+	
 	Thread loadType = new Thread(){
 		public void run() {
 			type = dataHelper.getType();
