@@ -22,4 +22,7 @@
 	<string name="name">名称:</string>
 	<string name="add">添加</string>
 	<string name="save">保存</string>
+	<string name="colon">:</string>
+	<string name="click_to_input_time">点击输入时间</string>
+	<string name="select_time">选择时间</string>
 </resources>

@@ -186,6 +186,20 @@ public class DataHelper {
     	return list;
     }
     
+    public ArrayList<Map<String,String>> getCollectByTime(String start,String end){
+    	ArrayList<Map<String,String>> list = new ArrayList<Map<String,String>>();
+    	Cursor cursor = db.query(SqliteHelper.VIEW, null, "TIME>? AND TIME<?", new String[]{start,end}, null, null, null) ;
+    	while(cursor.moveToNext()){
+    		HashMap<String,String> map = new HashMap<String, String>();
+    		map.put("TYPE", cursor.getString(2));
+    		map.put("ATTRIBUTE", cursor.getString(3));
+    		map.put("VALUE", cursor.getString(4));
+    		map.put("TIME", cursor.getString(5));
+    		list.add(map);
+    	}
+    	return list;
+    }
+    
 //    
 //    public int deleteSetting(String id){
 //    	if(id!=null){

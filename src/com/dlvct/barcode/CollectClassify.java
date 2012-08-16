@@ -49,7 +49,7 @@ public class CollectClassify extends TabActivity{
 			name.setText(type.get(i).get("TYPE"));
 			icon.setImageResource(R.drawable.card_history_left);
 			tab.setIndicator(item);
-			Intent one = new Intent(CollectClassify.this,CollectTmp.class);
+			Intent one = new Intent(CollectClassify.this,CollectClassifyRight.class);
 			one.putExtra("ID", type.get(i).get("ID"));
 			one.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			tab.setContent(one);
