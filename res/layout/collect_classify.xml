@@ -9,12 +9,18 @@
 	    android:layout_height="fill_parent"
 	    android:background="@color/deep_gray"
 	    android:orientation="horizontal">
-	    <com.dlvct.view.VerticalTabWidget
-			android:layout_width="100.0dp"
-			android:layout_height="wrap_content"
-			android:background="@color/deep_gray"
-			android:id="@android:id/tabs"
-			/>
+	    <ScrollView 
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:scrollbars="none"
+	        >
+	        <com.dlvct.view.VerticalTabWidget
+				android:layout_width="100.0dp"
+				android:layout_height="wrap_content"
+				android:background="@color/deep_gray"
+				android:id="@android:id/tabs"
+				/>
+	    </ScrollView>
 		<FrameLayout
 			android:layout_width="0dp"
 			android:layout_height="fill_parent"

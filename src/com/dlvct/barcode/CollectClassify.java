@@ -40,21 +40,23 @@ public class CollectClassify extends TabActivity{
 	private void initView(){
 		tabHost = getTabHost();
 		int size = type.size();
-		for(int i=0;i<size;i++){
-			View item = inflater.inflate(R.layout.collect_left_item, null);
-			TextView name = (TextView)item.findViewById(R.id.collect_left_item_text);
-			ImageView icon = (ImageView)item.findViewById(R.id.collect_left_item_img);
-			
-			TabSpec tab = tabHost.newTabSpec(type.get(i).get("TYPE"));
-			name.setText(type.get(i).get("TYPE"));
-			icon.setImageResource(R.drawable.card_history_left);
-			tab.setIndicator(item);
-			Intent one = new Intent(CollectClassify.this,CollectClassifyRight.class);
-			one.putExtra("ID", type.get(i).get("ID"));
-			one.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			tab.setContent(one);
-			tabHost.addTab(tab);
-		}
+//		for(int j=0;j<4;j++){
+			for(int i=0;i<size;i++){
+				View item = inflater.inflate(R.layout.collect_left_item, null);
+				TextView name = (TextView)item.findViewById(R.id.collect_left_item_text);
+				ImageView icon = (ImageView)item.findViewById(R.id.collect_left_item_img);
+				
+				TabSpec tab = tabHost.newTabSpec(type.get(i).get("TYPE"));
+				name.setText(type.get(i).get("TYPE"));
+				icon.setImageResource(R.drawable.card_history_left);
+				tab.setIndicator(item);
+				Intent one = new Intent(CollectClassify.this,CollectClassifyRight.class);
+				one.putExtra("ID", type.get(i).get("ID"));
+				one.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				tab.setContent(one);
+				tabHost.addTab(tab);
+			}
+//		}
 		
 //		
 //		TabSpec tab1 = tabHost.newTabSpec("tab1");
