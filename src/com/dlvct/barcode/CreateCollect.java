@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -109,7 +110,9 @@ public class CreateCollect extends Activity {
 		for(int i=0;i<size;i++){
 			View item = inflater.inflate(R.layout.create_new_item, null);
 			((TextView)(item.findViewById(R.id.create_new_item_name))).setText(attributeData.get(i).get("NAME"));
+			((Button)(item.findViewById(R.id.create_new_item_icon))).setVisibility(View.GONE);
 			list.addView(item, i);
+			Log.i("initList",String.valueOf(i));
 		}
 	}
 	

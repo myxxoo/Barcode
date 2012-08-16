@@ -1,12 +1,16 @@
 package com.dlvct.barcode;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 
 import com.dlvct.utils.db.DataHelper;
+import com.dlvct.utils.db.constant.Constant;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.AssetManager;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -16,6 +20,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -30,6 +36,7 @@ public class CollectClassifyRight extends Activity{
 	private String typeId;
 	private DataHelper dataHelper;
 	private ArrayList<Integer> breakIndexs = new ArrayList<Integer>();
+	private AssetManager asset;
 	private final int LOAD_DATA_FINISH = 10;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +48,7 @@ public class CollectClassifyRight extends Activity{
 		typeId = intent.getStringExtra("ID");
 		inflater = getLayoutInflater();
 		dataHelper = new DataHelper(this);
+		asset = getAssets();
 		initView();
 		handler = new Handler(){
 			@Override
@@ -79,8 +87,15 @@ public class CollectClassifyRight extends Activity{
 			View item = inflater.inflate(R.layout.collect_right_item, null);
 			TextView name = (TextView) item.findViewById(R.id.collect_right_item_name);
 			TextView value = (TextView) item.findViewById(R.id.collect_right_item_value);
+			ImageView icon = (ImageView)item.findViewById(R.id.collect_right_item_icon);
 			name.setText(data.get(i).get("ATTRIBUTE"));
 			value.setText(data.get(i).get("VALUE"));
+			try {
+				icon.setImageBitmap(BitmapFactory.decodeStream(asset.open(Constant.ICON_PATH+"/"+data.get(i).get("ICON"))));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			listView.addView(item, j);
 			j++;
 		}

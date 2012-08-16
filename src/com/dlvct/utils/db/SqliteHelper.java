@@ -57,7 +57,8 @@ public class SqliteHelper extends SQLiteOpenHelper{
 				TB_ATTRIBUTE+"("+
                 "ID"+" integer  primary key,"+
                 "TYPEID"+" varchar,"+
-                "NAME"+" varchar"+
+                "NAME"+" varchar,"+
+                "ICON"+" varchar"+
                 ")"
                 );
         db.execSQL("CREATE TABLE IF NOT EXISTS "+
@@ -70,7 +71,7 @@ public class SqliteHelper extends SQLiteOpenHelper{
                 ")"
                 );
         db.execSQL("CREATE VIEW IF NOT EXISTS "+
-				VIEW+" AS SELECT C.TYPEID,C.ATTRIBUTE_ID,A.TYPE,B.NAME AS ATTRIBUTE,C.VALUE,C.TIME FROM "+
+				VIEW+" AS SELECT C.TYPEID,C.ATTRIBUTE_ID,A.TYPE,B.NAME AS ATTRIBUTE,C.VALUE,B.ICON,C.TIME FROM "+
         		TB_TYPE+" A,"+TB_ATTRIBUTE+" B,"+TB_COLLECT+" C WHERE A.ID=B.TYPEID AND C.TYPEID=A.ID AND C.ATTRIBUTE_ID=B.ID ORDER BY C.TIME"
                 );
         for(int i=0;i<types.length;i++){

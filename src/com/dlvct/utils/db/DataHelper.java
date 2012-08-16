@@ -126,14 +126,15 @@ public class DataHelper {
 		r = db.insert(SqliteHelper.TB_TYPE, null, values);
     	return r;
     }
-    public long saveAttribute(String typeId,ArrayList<String> data){
+    public long saveAttribute(String typeId,ArrayList<Map<String,String>> data){
     	long r = -1;
     	ContentValues values = new ContentValues();
     	int size = data.size();
     	db.beginTransaction();	
     	for(int i=0;i<size;i++){
         	values.put("TYPEID", typeId);
-        	values.put("NAME", data.get(i));
+        	values.put("NAME", data.get(i).get("NAME"));
+        	values.put("ICON", data.get(i).get("ICON"));
         	db.insert(SqliteHelper.TB_ATTRIBUTE, null, values);
     	}
     	db.setTransactionSuccessful();
@@ -149,6 +150,7 @@ public class DataHelper {
     		map.put("ID", cursor.getString(0));
     		map.put("TYPEID", cursor.getString(1));
     		map.put("NAME", cursor.getString(2));
+    		map.put("ICON", cursor.getString(3));
     		list.add(map);
     	}
     	return list;
@@ -180,7 +182,8 @@ public class DataHelper {
     		map.put("TYPE", cursor.getString(2));
     		map.put("ATTRIBUTE", cursor.getString(3));
     		map.put("VALUE", cursor.getString(4));
-    		map.put("TIME", cursor.getString(5));
+    		map.put("ICON", cursor.getString(5));
+    		map.put("TIME", cursor.getString(6));
     		list.add(map);
     	}
     	return list;
@@ -194,7 +197,8 @@ public class DataHelper {
     		map.put("TYPE", cursor.getString(2));
     		map.put("ATTRIBUTE", cursor.getString(3));
     		map.put("VALUE", cursor.getString(4));
-    		map.put("TIME", cursor.getString(5));
+    		map.put("ICON", cursor.getString(5));
+    		map.put("TIME", cursor.getString(6));
     		list.add(map);
     	}
     	return list;

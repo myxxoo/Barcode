@@ -1,14 +1,18 @@
 package com.dlvct.barcode;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
 import com.dlvct.utils.db.DataHelper;
+import com.dlvct.utils.db.constant.Constant;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.res.AssetManager;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -17,6 +21,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,6 +41,7 @@ public class CollectTime extends Activity{
 	private ArrayList<Integer> breakIndexs = new ArrayList<Integer>();
 	private DataHelper dataHelper;
 	private LoadData loadData;
+	private AssetManager asset;
 	private long time;
 	private final int DATA_LOAD_FINISH = 10;
 	@Override
@@ -66,6 +72,7 @@ public class CollectTime extends Activity{
 	private void initData(){
 		inflater = getLayoutInflater();
 		dataHelper = new DataHelper(this);
+		asset = getAssets();
 	}
 	
 	private void initView(){
@@ -102,8 +109,15 @@ public class CollectTime extends Activity{
 				View item = inflater.inflate(R.layout.collect_right_item, null);
 				TextView name = (TextView) item.findViewById(R.id.collect_right_item_name);
 				TextView value = (TextView) item.findViewById(R.id.collect_right_item_value);
+				ImageView icon = (ImageView)item.findViewById(R.id.collect_right_item_icon);
 				name.setText(data.get(i).get("ATTRIBUTE"));
 				value.setText(data.get(i).get("VALUE"));
+				try {
+					icon.setImageBitmap(BitmapFactory.decodeStream(asset.open(Constant.ICON_PATH+"/"+data.get(i).get("ICON"))));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				listView.addView(item, j);
 				j++;
 			}
